@@ -1,9 +1,9 @@
 package org.adani.starbuck.core.data;
 
-import org.adani.starbuck.data.jdbc.TypedJDBCFilter;
+import org.adani.starbuck.data.core.models.Condition;
+import org.adani.starbuck.data.jdbc.search.TypedJDBCSearchFilter;
 import org.adani.starbuck.data.core.Filter;
 import org.adani.starbuck.data.core.GenericDAO;
-import org.adani.starbuck.data.jdbc.search.SearchCondition;
 import org.adani.starbuck.domain.product.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,15 +28,11 @@ public class GenericJDBCDAOImplTest {
         Product item = new Product();
         item.setName("Fancy Vase");
 
-
-
-
-        SearchCondition<Product> condition = new SearchCondition<>();
-
-        Filter<Product> productFilter = new TypedJDBCFilter.Builder<Product>(item.getClass(), new SearchCondition<Product>(item)).build();
-        final Product fetchedItem = productDAO.fetch(productFilter);
+        Filter<Product> productFilter = new TypedJDBCSearchFilter.Builder<>(Product.class).addCondition(new Condition("name", "=", "Fansy Vase")).build();
+        Product fetchedItem = productDAO.fetch(productFilter);
 
         assertThat(fetchedItem.getName(), is(equalTo(item.getName())));
+
     }
 
     @Test

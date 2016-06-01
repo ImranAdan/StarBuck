@@ -8,16 +8,15 @@ import java.util.Optional;
 public final class DateTimeUtils {
 
 
-    public static String getCurrentTime(Optional<String> format){
+    public static String getCurrentTime(Optional<String> format) {
 
-           if(!format.isPresent()){
-               return new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-           }
+        if (format.isPresent()) {
+            final String dateFormat = format.get();
+            return new SimpleDateFormat(dateFormat).format(new Date());
+        }
 
-        final String dateFormat = format.get();
-        return new SimpleDateFormat(dateFormat).format(new Date());
+        return new SimpleDateFormat("dd-MM-yyyy").format(new Date());
     }
-
 
 
 }

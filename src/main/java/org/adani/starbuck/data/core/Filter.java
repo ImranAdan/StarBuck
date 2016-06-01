@@ -5,7 +5,7 @@ import org.adani.starbuck.data.core.models.Condition;
 public interface Filter<T> {
 
     // Creation of Filter
-    Filter<T> basedOn(T item);
+    Filter<T> createFilterFrom(T item);
 
     // Manipulation of Filter
     Filter<T> addCondition(Condition condition);

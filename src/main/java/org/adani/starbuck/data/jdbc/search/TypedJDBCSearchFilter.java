@@ -1,9 +1,7 @@
-package org.adani.starbuck.data.jdbc;
+package org.adani.starbuck.data.jdbc.search;
 
 import org.adani.starbuck.data.core.models.Condition;
-import org.adani.starbuck.data.jdbc.search.SearchCondition;
 import org.adani.starbuck.data.core.Filter;
-import org.adani.starbuck.domain.product.Product;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
@@ -12,18 +10,18 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class TypedJDBCFilter<T> implements Filter<T> {
+public class TypedJDBCSearchFilter<T> implements Filter<T> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TypedJDBCFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TypedJDBCSearchFilter.class);
 
     private final Class<T> parameterType;
-    private final SearchCondition<T> searchCondition;
+    private final TypedJDBCSearchCondition<T> searchCondition;
 
     private final String query;
     private final int start;
     private final int limit;
 
-    private TypedJDBCFilter(Builder<T> builder){
+    private TypedJDBCSearchFilter(Builder<T> builder){
         parameterType = builder.parameterType;
         searchCondition = builder.searchCondition;
 
@@ -33,7 +31,7 @@ public class TypedJDBCFilter<T> implements Filter<T> {
     }
 
     @Override
-    public Filter<T> basedOn(T item) {
+    public Filter<T> createFilterFrom(T item) {
         return null;
     }
 
@@ -54,12 +52,7 @@ public class TypedJDBCFilter<T> implements Filter<T> {
 
     @Override
     public String generateQuery() {
-        /**
-         *
-         * TODO: Generate the SQL String here
-         *
-         */
-        return null;
+        return this.query;
     }
 
     @Override
@@ -84,22 +77,24 @@ public class TypedJDBCFilter<T> implements Filter<T> {
     }
 
 
-    public static class Builder<T>{
+    public static class Builder<T> {
 
+        private static final Logger LOGGER = LoggerFactory.getLogger(TypedJDBCSearchFilter.class);
         private final Class<T> parameterType;
-        private final SearchCondition<T> searchCondition;
+        private final TypedJDBCSearchCondition<T> searchCondition;
 
-        private  String query;
-        private  int start;
-        private  int limit;
+        private String query;
+        private int start;
+        private int limit;
 
-        public Builder(Class<T> parameterType, SearchCondition<T> searchCondition) {
-            this.parameterType = parameterType;
-            this.searchCondition = searchCondition;
+        public Builder(Class<T> type) {
+            this.parameterType = type;
+            this.searchCondition = new TypedJDBCSearchCondition<>(type);
+
+            // Default Values
+            this.start = 0;
+            this.limit = 25;
         }
-
-
-
 
         public Builder<T> start(int start){
             this.start = start;
@@ -111,14 +106,31 @@ public class TypedJDBCFilter<T> implements Filter<T> {
             return this;
         }
 
-        public TypedJDBCFilter<T> build(){
-            return new TypedJDBCFilter<>(this);
+        public Builder<T> addCondition(Condition filterCondition){
+            searchCondition.add(filterCondition);
+            return this;
+        }
+
+        public TypedJDBCSearchFilter<T> build(){
+            LOGGER.info("Building TypedJDBCSearchFilter...");
+            this.query = generateQuery();
+            return new TypedJDBCSearchFilter<>(this);
+        }
+
+        String generateQuery(){
+            String sql = searchCondition.convert();
+            return sql;
         }
 
         @Override
         public String toString() {
-            return  ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+            return  ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
         }
+    }
+
+    @Override
+    public String toString() {
+        return  ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 
 }
