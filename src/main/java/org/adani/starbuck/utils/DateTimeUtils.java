@@ -1,0 +1,23 @@
+package org.adani.starbuck.utils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Optional;
+
+
+public final class DateTimeUtils {
+
+
+    public static String getCurrentTime(Optional<String> format){
+
+           if(!format.isPresent()){
+               return new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+           }
+
+        final String dateFormat = format.get();
+        return new SimpleDateFormat(dateFormat).format(new Date());
+    }
+
+
+
+}
