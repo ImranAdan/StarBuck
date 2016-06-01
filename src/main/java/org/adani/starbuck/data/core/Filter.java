@@ -5,16 +5,17 @@ import org.adani.starbuck.data.core.models.Condition;
 public interface Filter<T> {
 
     // Creation of Filter
-    Filter<T> createFilterBasedOn(T item);
-
+    Filter<T> basedOn(T item);
 
     // Manipulation of Filter
     Filter<T> addCondition(Condition condition);
 
-
     // Filter Meta-data
-    String generateQuery();
+    int start();
 
+    int limit();
+
+    String generateQuery();
 
     Class<T> getFilterType();
 

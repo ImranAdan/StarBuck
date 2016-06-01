@@ -8,13 +8,11 @@ public interface GenericDAO<T> {
 
     T fetch(Filter<T> filter);
 
-    Page<T> fetchItems(Filter<T> filter, Optional<Integer> startingIndex, Optional<Integer> pageLimit);
-
+    Page<T> fetchItems(Filter<T> filter);
 
     T create(T item);
 
     T update(T item);
-
 
     void delete(T item);
 }

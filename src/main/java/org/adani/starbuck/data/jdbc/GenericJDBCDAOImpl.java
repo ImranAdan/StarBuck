@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.util.Optional;
+import java.util.List;
 
 public class GenericJDBCDAOImpl<T> implements GenericDAO<T> {
 
@@ -18,31 +18,35 @@ public class GenericJDBCDAOImpl<T> implements GenericDAO<T> {
     @Autowired
     DataSource dataSource;
 
-
     @Override
     public T fetch(Filter<T> filter) {
         Class<T> type = filter.getFilterType();
-        final T item = new JdbcTemplate(dataSource).queryForObject(filter.generateFilterQuery(), type);
+        LOGGER.info("Fetching <"+type.getSimpleName() +"> With Filter:" + filter.toString());
+        T item = new JdbcTemplate(dataSource).queryForObject(filter.generateQuery(), type);
         return item;
     }
 
     @Override
-    public Page<T> fetchItems(Filter<T> filter, Optional<Integer> startingIndex, Optional<Integer> pageLimit) {
-        return null;
+    public Page<T> fetchItems(Filter<T> filter) {
+        Class<T> type = filter.getFilterType();
+        LOGGER.info("Fetching Page of <"+type.getSimpleName() +"> With Filter:" + filter.toString());
+        List<T> pageItems = new JdbcTemplate(dataSource).queryForList(filter.generateQuery(), type);
+        Page<T> page = new Page<>(pageItems);
+        return page;
     }
 
     @Override
     public T create(T item) {
-        return null;
+        throw new UnsupportedOperationException("Not Yet implemented");
     }
 
     @Override
     public T update(T item) {
-        return null;
+        throw new UnsupportedOperationException("Not Yet implemented");
     }
 
     @Override
     public void delete(T item) {
-
+        throw new UnsupportedOperationException("Not Yet implemented");
     }
 }

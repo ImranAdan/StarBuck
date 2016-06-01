@@ -3,102 +3,122 @@ package org.adani.starbuck.data.jdbc;
 import org.adani.starbuck.data.core.models.Condition;
 import org.adani.starbuck.data.jdbc.search.SearchCondition;
 import org.adani.starbuck.data.core.Filter;
+import org.adani.starbuck.domain.product.Product;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class TypedJDBCFilter<T> implements Filter<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TypedJDBCFilter.class);
+
     private final Class<T> parameterType;
-
-
-    // TODO: This need to be built using a builder pattern
     private final SearchCondition<T> searchCondition;
 
+    private final String query;
+    private final int start;
+    private final int limit;
 
-    public TypedJDBCFilter(Class<T> type){
-        LOGGER.debug("Creating new empty TypedJDBCFilter<" + type.getCanonicalName()+">");
-        parameterType = type;
-        searchCondition = new SearchCondition<>(type);
+    private TypedJDBCFilter(Builder<T> builder){
+        parameterType = builder.parameterType;
+        searchCondition = builder.searchCondition;
+
+        query = builder.query;
+        start = builder.start;
+        limit = builder.limit;
     }
-
-    public TypedJDBCFilter(SearchCondition<T> searchCondition) {
-        parameterType = searchCondition.getParameterType();
-        this.searchCondition = searchCondition;
-    }
-
-    public TypedJDBCFilter(T item) {
-        this(baseOn(item));
-
-    }
-
-    private static <T> SearchCondition<T> baseOn(T item) {
-        SearchCondition<T> basedOn = new SearchCondition<>(item);
-        return basedOn;
-    }
-
 
     @Override
-    public Filter<T> createFilterBasedOn(T item) {
-        //TODO: Create a filter based in the attributes of the object passed in
+    public Filter<T> basedOn(T item) {
         return null;
     }
 
     @Override
     public Filter<T> addCondition(Condition condition) {
-        //TODO: Add Conditions to the filter --> use a builder style pattern to build
         return null;
     }
 
     @Override
+    public int start() {
+        return getStart();
+    }
+
+    @Override
+    public int limit() {
+        return getLimit();
+    }
+
+    @Override
     public String generateQuery() {
-        // Given the filter of this specific type generate a query appropriate for it
+        /**
+         *
+         * TODO: Generate the SQL String here
+         *
+         */
         return null;
     }
 
     @Override
     public Class<T> getFilterType() {
-        return parameterType;
+        return getParameterType();
     }
 
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+    public String getQuery() {
+        return query;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public SearchCondition<T> getSearchCondition() {
-        return searchCondition;
+    public int getStart() {
+        return start;
     }
 
+    public int getLimit() {
+        return limit;
+    }
 
-    public Class<?> getParameterType() {
+    public Class<T> getParameterType() {
         return parameterType;
     }
 
 
+    public static class Builder<T>{
+
+        private final Class<T> parameterType;
+        private final SearchCondition<T> searchCondition;
+
+        private  String query;
+        private  int start;
+        private  int limit;
+
+        public Builder(Class<T> parameterType, SearchCondition<T> searchCondition) {
+            this.parameterType = parameterType;
+            this.searchCondition = searchCondition;
+        }
+
+
+
+
+        public Builder<T> start(int start){
+            this.start = start;
+            return this;
+        }
+
+        public Builder<T> limit(int limit){
+            this.limit = limit;
+            return this;
+        }
+
+        public TypedJDBCFilter<T> build(){
+            return new TypedJDBCFilter<>(this);
+        }
+
+        @Override
+        public String toString() {
+            return  ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+        }
+    }
 
 }
