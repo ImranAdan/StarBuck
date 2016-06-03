@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!-- Load all external dependencies first -->
+    <!-- Load application external dependencies first -->
         <import resource="database-context.xml"/>
 
 

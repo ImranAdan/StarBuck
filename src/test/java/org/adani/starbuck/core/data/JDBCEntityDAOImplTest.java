@@ -1,9 +1,10 @@
 package org.adani.starbuck.core.data;
 
+import org.adani.starbuck.data.core.models.AbstractEntityFilter;
 import org.adani.starbuck.data.core.models.Condition;
-import org.adani.starbuck.data.jdbc.search.TypedJDBCSearchFilter;
-import org.adani.starbuck.data.core.Filter;
-import org.adani.starbuck.data.core.GenericDAO;
+import org.adani.starbuck.data.access.jdbc.search.TypedJDBCSearchFilter;
+import org.adani.starbuck.data.core.models.AbstractEntityDAO;
+import org.adani.starbuck.data.core.models.Operator;
 import org.adani.starbuck.domain.product.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +18,10 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:app-context.xml"})
-public class GenericJDBCDAOImplTest {
+public class JDBCEntityDAOImplTest {
 
     @Autowired
-    GenericDAO<Product> productDAO;
+    AbstractEntityDAO<Product> productDAO;
 
     @Test
     public void testFetchWithItem() throws Exception {
@@ -28,7 +29,7 @@ public class GenericJDBCDAOImplTest {
         Product item = new Product();
         item.setName("Fancy Vase");
 
-        Filter<Product> productFilter = new TypedJDBCSearchFilter.Builder<>(Product.class).addCondition(new Condition("name", "=", "Fansy Vase")).build();
+        AbstractEntityFilter<Product> productFilter = new TypedJDBCSearchFilter.Builder<>(Product.class).addCondition(new Condition("name", Operator.EQUALS, "Fansy Vase")).build();
         Product fetchedItem = productDAO.fetch(productFilter);
 
         assertThat(fetchedItem.getName(), is(equalTo(item.getName())));

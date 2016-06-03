@@ -6,7 +6,7 @@
 
     <!-- Specify all the DAO beans -->
 
-    <bean id="productDAO" class="org.adani.starbuck.data.jdbc.GenericJDBCDAOImpl" autowire="byName"/>
+    <bean id="productDAO" class="org.adani.starbuck.data.access.jdbc.JDBCEntityDAO" autowire="byName"/>
 
 
 
