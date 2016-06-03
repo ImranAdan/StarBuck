@@ -1,7 +1,7 @@
-package org.adani.starbuck.data.jdbc.search;
+package org.adani.starbuck.data.access.jdbc.search;
 
+import org.adani.starbuck.data.core.models.AbstractEntityFilter;
 import org.adani.starbuck.data.core.models.Condition;
-import org.adani.starbuck.data.core.Filter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class TypedJDBCSearchFilter<T> implements Filter<T> {
+public class TypedJDBCSearchFilter<T> implements AbstractEntityFilter<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TypedJDBCSearchFilter.class);
 
@@ -31,12 +31,12 @@ public class TypedJDBCSearchFilter<T> implements Filter<T> {
     }
 
     @Override
-    public Filter<T> createFilterFrom(T item) {
+    public AbstractEntityFilter<T> createBasedOn(T item) {
         return null;
     }
 
     @Override
-    public Filter<T> addCondition(Condition condition) {
+    public AbstractEntityFilter<T> addCondition(Condition condition) {
         return null;
     }
 

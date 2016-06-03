@@ -1,4 +1,4 @@
-package org.adani.starbuck.data.jdbc.search;
+package org.adani.starbuck.data.access.jdbc.search;
 
 import org.adani.starbuck.data.core.models.Condition;
 
