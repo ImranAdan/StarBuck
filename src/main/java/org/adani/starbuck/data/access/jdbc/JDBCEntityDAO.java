@@ -1,7 +1,7 @@
 package org.adani.starbuck.data.access.jdbc;
 
-import org.adani.starbuck.data.core.models.AbstractEntityFilter;
-import org.adani.starbuck.data.core.models.AbstractEntityDAO;
+import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
+import org.adani.starbuck.data.core.entities.AbstractEntityDAO;
 import org.adani.starbuck.data.core.models.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.util.List;
+
 
 public class JDBCEntityDAO<T> implements AbstractEntityDAO<T> {
 
@@ -28,11 +28,7 @@ public class JDBCEntityDAO<T> implements AbstractEntityDAO<T> {
 
     @Override
     public Page<T> fetchItems(AbstractEntityFilter<T> filter) {
-        Class<T> type = filter.getFilterType();
-        LOGGER.info("Fetching Page of <"+type.getSimpleName() +"> With AbstractEntityFilter:" + filter.toString());
-        List<T> pageItems = new JdbcTemplate(dataSource).queryForList(filter.generateQuery(), type);
-        Page<T> page = new Page<>(pageItems);
-        return page;
+        throw new UnsupportedOperationException("Not Yet implemented");
     }
 
     @Override

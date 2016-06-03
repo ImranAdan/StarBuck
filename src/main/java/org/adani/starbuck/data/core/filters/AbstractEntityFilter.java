@@ -1,9 +1,12 @@
-package org.adani.starbuck.data.core.models;
+package org.adani.starbuck.data.core.filters;
+
+import org.adani.starbuck.data.core.models.Condition;
 
 /**
  * Defines a filter on a queryable entity. The filter must specify
  * creation, manipulation and the viewing of the state of the filter.
  * @param <T>
+ *     Type of Entity
  */
 public interface AbstractEntityFilter<T> {
 
@@ -40,19 +43,49 @@ public interface AbstractEntityFilter<T> {
     AbstractEntityFilter<T> addCondition(Condition condition);
 
 
-
     /********************************************************************
      *                  FILTER META-DATA
      *******************************************************************/
 
+    /**
+     * The limit applied to the result set
+     * obtained from the data source.
+     * @return
+     *  Total number of elements.
+     */
     int limit();
 
+    /**
+     * Indicate a starting location for
+     * a paginated result set.
+     * @return
+     */
     int start();
 
+    /**
+     * Generate a query for the underlying target
+     * datasource.
+     * @return
+     *  The query will be used when intergating the data
+     *  source for information.
+     */
     String generateQuery();
 
+    /**
+     * The type of the filter. This mehtod must retain underlying type
+     * during runtime.
+     * @return
+     *  Class represeting the filter type.
+     *
+     */
     Class<T> getFilterType();
 
+    /**
+     * Get the human readable string
+     * that represents the current filter.
+     * @return
+     *  String for the current filter.
+     */
     String toString();
 
 }

@@ -1,9 +1,9 @@
 package org.adani.starbuck.core.data;
 
-import org.adani.starbuck.data.core.models.AbstractEntityFilter;
+import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
 import org.adani.starbuck.data.core.models.Condition;
 import org.adani.starbuck.data.access.jdbc.search.TypedJDBCSearchFilter;
-import org.adani.starbuck.data.core.models.AbstractEntityDAO;
+import org.adani.starbuck.data.core.entities.AbstractEntityDAO;
 import org.adani.starbuck.data.core.models.Operator;
 import org.adani.starbuck.domain.product.Product;
 import org.junit.Test;

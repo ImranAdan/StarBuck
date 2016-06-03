@@ -1,6 +1,6 @@
 package org.adani.starbuck.data.access.jdbc.search;
 
-import org.adani.starbuck.data.core.models.AbstractEntityFilter;
+import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
 import org.adani.starbuck.data.core.models.Condition;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

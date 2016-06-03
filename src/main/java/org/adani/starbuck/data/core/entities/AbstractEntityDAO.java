@@ -1,5 +1,8 @@
-package org.adani.starbuck.data.core.models;
+package org.adani.starbuck.data.core.entities;
 
+
+import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
+import org.adani.starbuck.data.core.models.Page;
 
 /**
  * Defines an entity that can be queried for Data
