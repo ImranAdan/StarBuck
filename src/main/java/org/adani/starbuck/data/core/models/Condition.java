@@ -10,8 +10,6 @@ public class Condition {
     private final Operator operator;
     private final Object value;
 
-
-
     public Condition(String field, Operator operator, Object value) {
         this.field = field;
         this.operator = operator;

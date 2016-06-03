@@ -1,7 +1,7 @@
 package org.adani.starbuck.data.access.jdbc;
 
-import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
 import org.adani.starbuck.data.core.entities.AbstractEntityDAO;
+import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
 import org.adani.starbuck.data.core.models.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-
+/**
+ * JDBC Backed entity DAO. General purpose can be used
+ * with a set of supported sql dialects.
+ *
+ * @param <T> Entity type.
+ */
 public class JDBCEntityDAO<T> implements AbstractEntityDAO<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JDBCEntityDAO.class);

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.adani.starbuck</groupId>
     <artifactId>StarBuck</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>
@@ -48,6 +49,13 @@
             <version>4.2.5.RELEASE</version>
         </dependency>
 
+        <!-- http://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.2.5.RELEASE</version>
+        </dependency>
+
 
         <!-- OTHER -->
 
@@ -81,7 +89,6 @@
             <version>1.6.11</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -94,7 +101,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.google.guava</groupId>
