@@ -10,7 +10,7 @@ public class SqlStatementBuilder {
     private final List<Object> values;
 
 
-    public SqlStatementBuilder() {
+    public SqlStatementBuilder(SupportedSQLDialects supportedSQLDialects) {
         fields = new ArrayList<>();
         operators = new ArrayList<>();
         values = new ArrayList<>();

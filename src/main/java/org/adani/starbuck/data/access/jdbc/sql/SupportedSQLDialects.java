@@ -1,4 +1,4 @@
-package org.adani.starbuck.data.core.sources.support;
+package org.adani.starbuck.data.access.jdbc.sql;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -9,9 +9,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public enum SupportedSQLDialects {
 
 
-    // Statementbuilder here
+
     H2,
     MySQL;
+
+    // add as required
+
+
+
+
 
 
     @Override
