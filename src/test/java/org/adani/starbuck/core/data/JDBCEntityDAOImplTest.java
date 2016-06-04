@@ -1,9 +1,9 @@
 package org.adani.starbuck.core.data;
 
-import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
-import org.adani.starbuck.data.core.models.Condition;
 import org.adani.starbuck.data.access.jdbc.search.TypedJDBCSearchFilter;
 import org.adani.starbuck.data.core.entities.AbstractEntityDAO;
+import org.adani.starbuck.data.core.filters.AbstractEntityFilter;
+import org.adani.starbuck.data.core.models.Condition;
 import org.adani.starbuck.data.core.models.Operator;
 import org.adani.starbuck.domain.product.Product;
 import org.junit.Test;
@@ -14,7 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:app-context.xml"})

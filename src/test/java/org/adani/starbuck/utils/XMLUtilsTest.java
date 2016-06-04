@@ -1,12 +1,9 @@
 package org.adani.starbuck.utils;
 
 import org.adani.starbuck.domain.product.Product;
-import org.hamcrest.number.BigDecimalCloseTo;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-
-import static org.junit.Assert.*;
 
 public class XMLUtilsTest {
 

@@ -2,8 +2,6 @@ package org.adani.starbuck.data.access.jdbc;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class JDBCEntityDAOTest {
 
     @Test
