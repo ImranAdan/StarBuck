@@ -10,8 +10,8 @@ import java.util.Map;
 
 public abstract class QueryableSourceSession {
 
-    private final Map<String, Object> sessionMeta;
     private final QueryableInitialisationConfiguration queryableInitialisationConfiguration;
+    private final Map<String, Object> sessionMeta;
 
     protected QueryableSourceSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
         this.queryableInitialisationConfiguration = queryableInitialisationConfiguration;
@@ -22,12 +22,12 @@ public abstract class QueryableSourceSession {
         return queryableInitialisationConfiguration;
     }
 
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
-    }
-
     public Map<String, Object> getSessionMeta() {
         return sessionMeta;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

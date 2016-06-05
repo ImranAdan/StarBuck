@@ -23,7 +23,7 @@ public class QueryableImpl implements Queryable {
         return queryableInitialisationConfiguration;
     }
 
-    public QueryableSourceSession getQueryableSourceSession() throws Exception {
+    public QueryableSourceSession createQueryableSourceSession() throws Exception {
         return getCreatedSession();
     }
 

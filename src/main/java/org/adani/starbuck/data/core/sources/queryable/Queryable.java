@@ -15,12 +15,12 @@ public interface Queryable {
 
 
     /**
-     * Establish a session to a Queryable
-     * source. Session are established by making
+     * Get the session that is created upon the creation of the
+     * queryable source. Session are established by making
      * use of the configuration information associated
-     * with the queryable
+     * with the queryable.
      */
-    QueryableSourceSession getQueryableSourceSession() throws Exception;
+    QueryableSourceSession createQueryableSourceSession() throws Exception;
 
 
 

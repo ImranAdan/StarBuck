@@ -21,13 +21,13 @@ public class QueryableImplTest {
     private Queryable queryableDatabase;
 
     @Test
-    public void testGetQueryableSourceSession() throws Exception {
+    public void testCreateQueryableSourceSession() throws Exception {
 
         // Get the configuration of the object
         QueryableInitialisationConfiguration queryableInitialisationConfiguration = queryableDatabase.getQueryableInitialisationConfiguration();
 
         // Get the sessions that is created upon creation of this object
-        QueryableSourceSession createdSession = queryableDatabase.getQueryableSourceSession();
+        QueryableSourceSession createdSession = queryableDatabase.createQueryableSourceSession();
 
         String configuredUser = (String) queryableInitialisationConfiguration.getConfigurations().get(Database.ConfigurationMetaData.USER_NAME);
         String actualUser = (String) createdSession.getSessionMeta().get(Database.ActualMetaData.USER_NAME);

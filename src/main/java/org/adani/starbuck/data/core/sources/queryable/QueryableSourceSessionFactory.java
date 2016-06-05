@@ -20,6 +20,8 @@ public class QueryableSourceSessionFactory {
                 queryableSourceSession = ServiceEndpointSessionFactory.newInstance(queryableInitialisationConfiguration);
                 return queryableSourceSession;
 
+            // Add additional cases and provide the instance creator for each
+
         }
 
         throw new RuntimeException("No suitable implementation found to initiate a session for " + queryableInitialisationConfiguration);
