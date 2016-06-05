@@ -10,20 +10,20 @@ public class QueryableImpl implements Queryable {
     private final QueryableInitialisationConfiguration queryableInitialisationConfiguration;
 
     // Session
-    private final QueryableSourceSession queryableSourceSession;
+    private final QueryableSession queryableSession;
 
 
     public QueryableImpl(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
         this.queryableInitialisationConfiguration = queryableInitialisationConfiguration;
-        queryableSourceSession = QueryableSourceSessionFactory.newSession(queryableInitialisationConfiguration);
+        queryableSession = QueryableSourceSessionFactory.newSession(queryableInitialisationConfiguration);
     }
 
 
-    public QueryableInitialisationConfiguration getQueryableInitialisationConfiguration() {
+    public QueryableInitialisationConfiguration getInitialisationConfiguration() {
         return queryableInitialisationConfiguration;
     }
 
-    public QueryableSourceSession createQueryableSourceSession() throws Exception {
+    public QueryableSession createQueryableSourceSession() throws Exception {
         return getCreatedSession();
     }
 
@@ -33,8 +33,8 @@ public class QueryableImpl implements Queryable {
     }
 
 
-    private QueryableSourceSession getCreatedSession(){
-        return queryableSourceSession;
+    private QueryableSession getCreatedSession(){
+        return queryableSession;
     }
 
 }

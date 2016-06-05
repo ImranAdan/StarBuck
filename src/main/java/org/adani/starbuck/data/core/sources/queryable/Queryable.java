@@ -10,7 +10,7 @@ public interface Queryable {
      *      Configuration information on the specific
      *      queryable entity.
      */
-    QueryableInitialisationConfiguration getQueryableInitialisationConfiguration();
+    QueryableInitialisationConfiguration getInitialisationConfiguration();
 
 
 
@@ -20,7 +20,7 @@ public interface Queryable {
      * use of the configuration information associated
      * with the queryable.
      */
-    QueryableSourceSession createQueryableSourceSession() throws Exception;
+    QueryableSession createQueryableSourceSession() throws Exception;
 
 
 

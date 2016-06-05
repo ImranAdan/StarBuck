@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:app-context.xml")
-public class QueryableSourceSessionFactoryTest {
+public class QueryableSessionFactoryTest {
 
 
     @Autowired
@@ -20,9 +20,9 @@ public class QueryableSourceSessionFactoryTest {
 
     @Test
     public void testNewSession() throws Exception {
-        final QueryableSourceSession queryableSourceSession = QueryableSourceSessionFactory.newSession(testDbConfig);
+        final QueryableSession queryableSession = QueryableSourceSessionFactory.newSession(testDbConfig);
         String configuredUser = ((String) testDbConfig.getConfigurations().get(Database.ConfigurationMetaData.USER_NAME)).toLowerCase();
-        String sessionUser = ((String) queryableSourceSession.getSessionMeta().get(Database.ActualMetaData.USER_NAME)).toLowerCase();
+        String sessionUser = ((String) queryableSession.getSessionMeta().get(Database.ActualMetaData.USER_NAME)).toLowerCase();
         assertTrue(sessionUser.equals(configuredUser));
     }
 }

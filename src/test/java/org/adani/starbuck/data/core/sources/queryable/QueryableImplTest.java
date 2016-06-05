@@ -1,15 +1,15 @@
-package org.adani.starbuck.data.core.sources;
+package org.adani.starbuck.data.core.sources.queryable;
 
 import org.adani.starbuck.data.core.sources.db.Database;
-import org.adani.starbuck.data.core.sources.queryable.Queryable;
-import org.adani.starbuck.data.core.sources.queryable.QueryableInitialisationConfiguration;
-import org.adani.starbuck.data.core.sources.queryable.QueryableSourceSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertTrue;
 
 
@@ -24,14 +24,15 @@ public class QueryableImplTest {
     public void testCreateQueryableSourceSession() throws Exception {
 
         // Get the configuration of the object
-        QueryableInitialisationConfiguration queryableInitialisationConfiguration = queryableDatabase.getQueryableInitialisationConfiguration();
+        QueryableInitialisationConfiguration queryableInitialisationConfiguration = queryableDatabase.getInitialisationConfiguration();
 
         // Get the sessions that is created upon creation of this object
-        QueryableSourceSession createdSession = queryableDatabase.createQueryableSourceSession();
+        QueryableSession createdSession = queryableDatabase.createQueryableSourceSession();
 
         String configuredUser = (String) queryableInitialisationConfiguration.getConfigurations().get(Database.ConfigurationMetaData.USER_NAME);
         String actualUser = (String) createdSession.getSessionMeta().get(Database.ActualMetaData.USER_NAME);
 
+        assertThat(createdSession, is(notNullValue()));
         assertTrue(configuredUser.equalsIgnoreCase(actualUser));
     }
 }

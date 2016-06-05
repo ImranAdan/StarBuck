@@ -1,24 +1,24 @@
 package org.adani.starbuck.data.core.sources.queryable;
 
-import org.adani.starbuck.data.core.sources.db.DatabaseSourceSessionFactory;
+import org.adani.starbuck.data.core.sources.db.DatabaseSessionFactory;
 import org.adani.starbuck.data.core.sources.web.ServiceEndpointSessionFactory;
 
 public class QueryableSourceSessionFactory {
 
 
-    public static QueryableSourceSession newSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
+    public static QueryableSession newSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
 
-        QueryableSourceSession queryableSourceSession;
+        QueryableSession queryableSession;
 
         switch (queryableInitialisationConfiguration.getQueryableType()) {
 
             case DATABASE:
-                queryableSourceSession = DatabaseSourceSessionFactory.newInstance(queryableInitialisationConfiguration);
-                return queryableSourceSession;
+                queryableSession = DatabaseSessionFactory.newInstance(queryableInitialisationConfiguration);
+                return queryableSession;
 
             case SERVICE_END_POINT:
-                queryableSourceSession = ServiceEndpointSessionFactory.newInstance(queryableInitialisationConfiguration);
-                return queryableSourceSession;
+                queryableSession = ServiceEndpointSessionFactory.newInstance(queryableInitialisationConfiguration);
+                return queryableSession;
 
             // Add additional cases and provide the instance creator for each
 

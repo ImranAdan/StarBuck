@@ -1,18 +1,18 @@
 package org.adani.starbuck.data.core.sources.db;
 
 import org.adani.starbuck.data.core.sources.queryable.QueryableInitialisationConfiguration;
-import org.adani.starbuck.data.core.sources.queryable.QueryableSourceSession;
+import org.adani.starbuck.data.core.sources.queryable.QueryableSession;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
-public class DatabaseSourceSession extends QueryableSourceSession {
+public class DatabaseSession extends QueryableSession {
 
     private final DataSource dataSource;
 
-    public DatabaseSourceSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration, String url, String userName, String pass, String driverClass) {
+    public DatabaseSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration, String url, String userName, String pass, String driverClass) {
         super(queryableInitialisationConfiguration);
         this.dataSource = createDataSource(url, userName, pass, driverClass);
         configureActualSessionMeta();

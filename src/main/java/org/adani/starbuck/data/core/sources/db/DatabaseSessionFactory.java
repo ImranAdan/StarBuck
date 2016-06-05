@@ -1,18 +1,18 @@
 package org.adani.starbuck.data.core.sources.db;
 
 import org.adani.starbuck.data.core.sources.queryable.QueryableInitialisationConfiguration;
-import org.adani.starbuck.data.core.sources.queryable.QueryableSourceSession;
+import org.adani.starbuck.data.core.sources.queryable.QueryableSession;
 
-public final class DatabaseSourceSessionFactory {
+public final class DatabaseSessionFactory {
 
-    public static QueryableSourceSession newInstance(QueryableInitialisationConfiguration queryableConfigurations) {
+    public static QueryableSession newInstance(QueryableInitialisationConfiguration queryableConfigurations) {
 
         String url = (String) queryableConfigurations.getConfigurations().get(Database.ConfigurationMetaData.URL_KEY);
         String userName = (String) queryableConfigurations.getConfigurations().get(Database.ConfigurationMetaData.USER_NAME);
         String pass = (String) queryableConfigurations.getConfigurations().get(Database.ConfigurationMetaData.PASSWORD);
         String driverClass = (String) queryableConfigurations.getConfigurations().get(Database.ConfigurationMetaData.DRIVER_CLASS);
 
-        return new DatabaseSourceSession(queryableConfigurations, url, userName, pass, driverClass);
+        return new DatabaseSession(queryableConfigurations, url, userName, pass, driverClass);
 
     }
 

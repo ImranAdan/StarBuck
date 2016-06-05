@@ -8,12 +8,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class QueryableSourceSession {
+public abstract class QueryableSession {
 
     private final QueryableInitialisationConfiguration queryableInitialisationConfiguration;
     private final Map<String, Object> sessionMeta;
 
-    protected QueryableSourceSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
+    protected QueryableSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
         this.queryableInitialisationConfiguration = queryableInitialisationConfiguration;
         sessionMeta = new HashMap<>();
     }
