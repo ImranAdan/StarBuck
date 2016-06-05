@@ -1,4 +1,4 @@
-package org.adani.starbuck.data.core.sources.auth;
+package org.adani.starbuck.data.core.sources.security;
 
 import java.util.HashMap;
 

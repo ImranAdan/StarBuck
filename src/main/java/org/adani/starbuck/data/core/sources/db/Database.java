@@ -1,12 +1,15 @@
 package org.adani.starbuck.data.core.sources.db;
 
-import org.adani.starbuck.data.core.sources.auth.Authentication;
-
 public interface Database {
 
 
+
+
+
+
+
     // Authentication
-    Authentication<Authentication>
+
 
 
     // Session Meta-Data
@@ -20,7 +23,19 @@ public interface Database {
 
 
 
+    interface ConfigurationMetaData{
+        String URL_KEY = "conf_dburl";
+        String USER_NAME="conf_username";
+        String PASSWORD = "conf_password";
+        String DRIVER_CLASS="conf_driver";
+    }
 
+    interface ActualMetaData{
+        String URL_KEY = "actual_dburl";
+        String USER_NAME="actual_username";
+        String PASSWORD = "actual_password";
+        String DRIVER_CLASS="actual_driver";
+    }
 
 
 }

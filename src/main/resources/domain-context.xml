@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    
 
-
-    <!-- Specify all the DAO beans -->
-
-    <bean id="productDAO" class="org.adani.starbuck.data.access.jdbc.JDBCEntityDAO" autowire="byName"/>
+    <bean id="queryable" class="org.adani.starbuck.data.core.sources.queryable.QueryableImpl" autowire="byName">
+        <constructor-arg ref="dbExampleConfig"/>
+    </bean>
 
 
 
     <!-- Specify other beans here -->
+    <bean id="dbExampleConfig" class="org.adani.starbuck.data.core.sources.queryable.QueryableInitialisationConfig">
+        <constructor-arg index="0" value="DATABASE"/>
+        <constructor-arg index="1" value=""/>
+        <constructor-arg index="2" ref=""/>
+    </bean>
+
+
+
+
+    <bean id="dbConfig" class="java.util.HashMap">
+        <util:map>
+            <entry key="dburl" value="jdbc:h2:tcp://localhost/~/athena"/>
+            <entry key="user" value="sa"/>
+            <entry key="pass" value=""/>
+        </util:map>
+    </bean>
+
 
 </beans>

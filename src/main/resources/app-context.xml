@@ -9,7 +9,7 @@
 
 
     <!-- Load application and domain specific configurations next -->
-      <!--  <import resource="domain-context.xml"/> -->
+        <import resource="domain-context.xml"/>
 
 
 
