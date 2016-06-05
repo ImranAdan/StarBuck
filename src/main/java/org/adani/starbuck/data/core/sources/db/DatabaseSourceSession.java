@@ -21,13 +21,19 @@ public class DatabaseSourceSession extends QueryableSourceSession {
     private void configureActualSessionMeta() {
         try {
 
-            final DatabaseMetaData metaData = dataSource.getConnection().getMetaData();
-            this.getSessionMeta().put(Database.ActualMetaData.URL_KEY, metaData.getURL());
-            this.getSessionMeta().put(Database.ActualMetaData.USER_NAME, metaData.getUserName());
-            this.getSessionMeta().put(Database.ActualMetaData.DRIVER_CLASS, metaData.getDriverName());
+            DatabaseMetaData metaData = dataSource.getConnection().getMetaData();
+
+            String url = metaData.getURL();
+            String userName = metaData.getUserName();
+            String driver = metaData.getDriverName();
+
+            this.getSessionMeta().put(Database.ActualMetaData.URL_KEY, url);
+            this.getSessionMeta().put(Database.ActualMetaData.USER_NAME, userName);
+            this.getSessionMeta().put(Database.ActualMetaData.DRIVER_CLASS, driver);
+
 
         } catch (SQLException e) {
-            throw new RuntimeException("ERROR::UNABLE TO ESTABLISH A SESSION!", e);
+            throw new RuntimeException("{ERROR}::UNABLE TO ESTABLISH A SESSION!", e);
         }
     }
 

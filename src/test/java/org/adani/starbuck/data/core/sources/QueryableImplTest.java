@@ -32,6 +32,6 @@ public class QueryableImplTest {
         String configuredUser = (String) queryableInitialisationConfiguration.getConfigurations().get(Database.ConfigurationMetaData.USER_NAME);
         String actualUser = (String) createdSession.getSessionMeta().get(Database.ActualMetaData.USER_NAME);
 
-        assertTrue(configuredUser.equals(actualUser));
+        assertTrue(configuredUser.equalsIgnoreCase(actualUser));
     }
 }

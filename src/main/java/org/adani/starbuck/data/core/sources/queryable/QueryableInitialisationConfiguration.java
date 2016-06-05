@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class QueryableInitialisationConfiguration {
 
+    private static final String TYPE_KEY = "conf_type";
     private final String description;
     private Map<String, ?> configurations;
 
@@ -25,7 +26,7 @@ public class QueryableInitialisationConfiguration {
     }
 
     public QueryableSourceType getQueryableType() {
-        QueryableSourceType type = QueryableSourceType.valueOf((String) configurations.get("conf_type"));
+        QueryableSourceType type = QueryableSourceType.valueOf((String) configurations.get(TYPE_KEY));
         return type;
     }
 

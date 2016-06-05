@@ -1,4 +1,4 @@
-package org.adani.starbuck.data.access.jdbc;
+package org.adani.starbuck.data.core.sources.security;
 
 /**
  * Access mechanism to a datasource

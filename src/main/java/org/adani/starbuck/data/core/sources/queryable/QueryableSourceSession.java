@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class QueryableSourceSession {
@@ -14,7 +15,7 @@ public abstract class QueryableSourceSession {
 
     protected QueryableSourceSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
         this.queryableInitialisationConfiguration = queryableInitialisationConfiguration;
-        this.sessionMeta = Collections.emptyMap();
+        sessionMeta = new HashMap<>();
     }
 
     public QueryableInitialisationConfiguration getQueryableInitialisationConfiguration() {
