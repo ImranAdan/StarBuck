@@ -10,7 +10,7 @@ public interface Queryable {
      *      Configuration information on the specific
      *      queryable entity.
      */
-    QueryableInitialisationConfig getQueryableInitialisationConfig();
+    QueryableInitialisationConfiguration getQueryableInitialisationConfiguration();
 
 
 

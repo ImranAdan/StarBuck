@@ -10,15 +10,15 @@ import java.util.Map;
 public abstract class QueryableSourceSession {
 
     private final Map<String, Object> sessionMeta;
-    private final QueryableInitialisationConfig queryableInitialisationConfig;
+    private final QueryableInitialisationConfiguration queryableInitialisationConfiguration;
 
-    protected QueryableSourceSession(QueryableInitialisationConfig queryableInitialisationConfig) {
-        this.queryableInitialisationConfig = queryableInitialisationConfig;
+    protected QueryableSourceSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
+        this.queryableInitialisationConfiguration = queryableInitialisationConfiguration;
         this.sessionMeta = Collections.emptyMap();
     }
 
-    public QueryableInitialisationConfig getQueryableInitialisationConfig() {
-        return queryableInitialisationConfig;
+    public QueryableInitialisationConfiguration getQueryableInitialisationConfiguration() {
+        return queryableInitialisationConfiguration;
     }
 
     @Override

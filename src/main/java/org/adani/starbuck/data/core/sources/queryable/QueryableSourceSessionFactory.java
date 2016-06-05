@@ -6,26 +6,23 @@ import org.adani.starbuck.data.core.sources.web.ServiceEndpointSessionFactory;
 public class QueryableSourceSessionFactory {
 
 
-    public static QueryableSourceSession newSession(QueryableInitialisationConfig queryableInitialisationConfig) {
+    public static QueryableSourceSession newSession(QueryableInitialisationConfiguration queryableInitialisationConfiguration) {
 
         QueryableSourceSession queryableSourceSession;
 
-        switch (queryableInitialisationConfig.getQueryableType()) {
+        switch (queryableInitialisationConfiguration.getQueryableType()) {
 
             case DATABASE:
-                queryableSourceSession = DatabaseSourceSessionFactory.newInstance(queryableInitialisationConfig);
+                queryableSourceSession = DatabaseSourceSessionFactory.newInstance(queryableInitialisationConfiguration);
                 return queryableSourceSession;
 
             case SERVICE_END_POINT:
-                queryableSourceSession = ServiceEndpointSessionFactory.newInstance(queryableInitialisationConfig);
+                queryableSourceSession = ServiceEndpointSessionFactory.newInstance(queryableInitialisationConfiguration);
                 return queryableSourceSession;
-
-
-            default:
-                throw new RuntimeException("No suitable implementation found to initiate a session for " + queryableInitialisationConfig);
 
         }
 
+        throw new RuntimeException("No suitable implementation found to initiate a session for " + queryableInitialisationConfiguration);
 
     }
 

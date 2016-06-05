@@ -1,25 +1,25 @@
 package org.adani.starbuck.data.core.sources.queryable;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:app-context.xml"})
 public class QueryableInitialisationConfigTest {
+
+
+    @Autowired
+    QueryableInitialisationConfiguration testDbConfig;
 
     @Test
     public void testToString() throws Exception {
 
-        Map<String, Object> configMap = new HashMap<>();
-        configMap.put("conf_type", "DATABASE");
-
-        QueryableInitialisationConfig config = new QueryableInitialisationConfig("Initialisation Configurations for a H2 DataSource", configMap);
-
-        assertTrue(config.getQueryableType() == QueryableSourceType.DATABASE  );
+        assertTrue(testDbConfig.getQueryableType() == QueryableSourceType.DATABASE);
 
     }
 }

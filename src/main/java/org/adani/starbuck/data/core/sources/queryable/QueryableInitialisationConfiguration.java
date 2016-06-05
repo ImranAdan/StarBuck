@@ -5,14 +5,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Map;
 
-public class QueryableInitialisationConfig {
+public class QueryableInitialisationConfiguration {
 
     private final String description;
     private Map<String, ?> configurations;
 
-    public QueryableInitialisationConfig(String description, Map<String, Object> configurations){
+    public QueryableInitialisationConfiguration(String description, Map<String, Object> configurations) {
         this.description = description;
         this.configurations = configurations;
+
     }
 
     public String getDescription() {
@@ -24,7 +25,7 @@ public class QueryableInitialisationConfig {
     }
 
     public QueryableSourceType getQueryableType() {
-        final QueryableSourceType type = (QueryableSourceType) configurations.get("type");
+        QueryableSourceType type = QueryableSourceType.valueOf((String) configurations.get("conf_type"));
         return type;
     }
 
