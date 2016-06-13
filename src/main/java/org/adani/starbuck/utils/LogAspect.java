@@ -9,26 +9,29 @@ import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//TODO: Change the log aspect or create other ones
+/**
+ *
+ * TODO: Currently this advices no one need to advice as follows: @Before("execution(* org.adani.starbuck.data.core.sources.{CLASS_NAME}.*.*(..))")
+ *
+ *
+ *
+ */
 @Aspect
 public class LogAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);
 
-
     @Before("execution(* org.adani.starbuck.data.core.sources.queryable.*.*(..))")
     public void onEntry(JoinPoint jp) {
         String args = getJointPointArgs(jp);
-        String actionMessage = "ENTRY~>[\n" +
-                "DECLARING TYPE: " + jp.getSignature().getDeclaringTypeName() + "\n" +
-                        "" + jp.getSignature().getName() +"(..) -> " + args + "]";
+        String actionMessage = "ENTRY:[" + jp.getSignature().getDeclaringTypeName() + "," + jp.getSignature().getName() + "(..) -> " + args + "]";
         LOGGER.info(actionMessage);
     }
 
     @After("execution(* org.adani.starbuck.data.core.sources.queryable.*.*(..))")
     public void onExit(JoinPoint jp) {
         String args = getJointPointArgs(jp);
-        String actionMessage = "EXIT ~> [ " + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() +"(..) -> " + args + "]";
+        String actionMessage = "EXIT:[" + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() +"(..) -> " + args + "]";
         LOGGER.info(actionMessage);
     }
 
@@ -42,14 +45,13 @@ public class LogAspect {
     }
 
     private String getJointPointArgs(JoinPoint jp) {
-        String actionArgs = "ARGS: [";
-        for (int i = 0; i < jp.getArgs().length; ++i) {
-            if (i == jp.getArgs().length - 1)
-                actionArgs += jp.getArgs()[i].toString();
-            else
-                actionArgs += jp.getArgs()[i].toString() + ",";
-        }
-        actionArgs += "]";
+        String actionArgs = "[";
+
+        for (Object o: jp.getArgs())
+            actionArgs += o.toString();
+
+        actionArgs = actionArgs.substring(actionArgs.length() - 1) +  "]";
+
         return actionArgs;
     }
 

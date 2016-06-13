@@ -1,0 +1,7 @@
+{
+  "id":12245654,
+  "name": "LOCALHOST - H2 Database Instance",
+  "url": "jdbc:h2:tcp://localhost/~/athena",
+  "source_type": "org.h2.Driver",
+  "description": "Local H2 database instance for development purposes"
+}

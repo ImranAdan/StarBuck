@@ -8,7 +8,7 @@ import java.util.Optional;
 public final class DateTimeUtils {
 
 
-    public static String getCurrentTime(Optional<String> format) {
+    public static String currentTime(Optional<String> format) {
 
         if (format.isPresent()) {
             final String dateFormat = format.get();

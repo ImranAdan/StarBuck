@@ -1,0 +1,12 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <jdbc:embedded-database id="testdb" type="H2" database-name="ATHENA" generate-name="false">
+        <jdbc:script location="classpath:ENV/LOCAL/sql/init.sql"/>
+    </jdbc:embedded-database>
+
+</beans>
