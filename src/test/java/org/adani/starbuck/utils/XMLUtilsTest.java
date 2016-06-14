@@ -8,7 +8,7 @@ public class XMLUtilsTest {
 
     @Test
     public void testToXMLString() throws Exception {
-        Source s = new Source("a", "b", SourceType.H2, "s");
+        Source s = new Source("a", "b", SourceType.H2.getConnector(), "s");
         System.out.print(s.toString());
     }
 }

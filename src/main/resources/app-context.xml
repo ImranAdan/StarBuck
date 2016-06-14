@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns="http://www.springframework.org/schema/beans"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- Property Placeholder Configure -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="ignoreResourceNotFound" value="true"/>
+    <bean id="CONF" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="location" value="${CONFIG_MODE}"/>
+        <property name="locations">
+            <list>
+                <value>${CONFIG_MODE}</value>
+                <value>${CONFIG_MODE}/app.properties</value>
+            </list>
+        </property>
     </bean>
 
-    <import resource="classpath:${CONFIG_MODE}/database-context.xml"/>
+    <!-- External Resources -->
+    <import resource="classpath:database-context.xml"/>
+
+    <!-- Domain Sepcefic configurations -->
 
 
     <import resource="classpath:${CONFIG_MODE}/domain-context.xml"/>
