@@ -1,12 +1,4 @@
-/**
-**
-** TODO: Investigate why embedded database cant be created
-** Initilisation Script
-** to create a test database enviornemtne for
-** local dev
-**
-**
-*/
+/** CREATE A SCHEMA FOR LOCAL TESTING ***/
 
 // Create a schema
 CREATE SCHEMA ATHENA AUTHORIZATION SA;

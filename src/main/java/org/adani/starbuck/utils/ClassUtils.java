@@ -19,14 +19,18 @@ public final class ClassUtils {
     public static <T> T make(Type objectType, Map<Object, Class<?>> valueTypeMap) {
 
         try {
+
             Class<T> clazz = (Class<T>) Class.forName(objectType.getTypeName());
 
             Collection<Class<?>> parameterTypesMapValues = valueTypeMap.values();
+
             Class<?>[] parameterTypes = parameterTypesMapValues.toArray(new Class<?>[parameterTypesMapValues.size()]);
 
             Constructor<T> cons = clazz.getConstructor(parameterTypes);
 
-            T instance = cons.newInstance(valueTypeMap.keySet());
+            Object[] initArgs = valueTypeMap.keySet().toArray(new Object[valueTypeMap.keySet().size()]);
+
+            T instance = cons.newInstance(initArgs);
 
             return instance;
         } catch (ClassNotFoundException | NoSuchMethodException

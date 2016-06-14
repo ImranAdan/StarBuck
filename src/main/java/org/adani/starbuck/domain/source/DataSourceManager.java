@@ -32,7 +32,8 @@ public class DataSourceManager {
     }
 
     public List<Source> getAll(int pageNumber, int pageSize, String sortKey, String direction) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        List<Source> allSources = sourceRepository.findAllByType(new PageRequest(pageNumber, pageSize, new Sort(Sort.Direction.valueOf(direction), sortKey)));
+        return allSources;
     }
 
     public List<Source> getByType(int pageNumber, int pageSize, String sortKey, String direction) {
