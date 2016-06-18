@@ -20,8 +20,6 @@
     <import resource="classpath:database-context.xml"/>
 
     <!-- Domain Sepcefic configurations -->
-
-
     <import resource="classpath:${CONFIG_MODE}/domain-context.xml"/>
 
     <!-- Aspect J Proxy with Logging Aspect -->

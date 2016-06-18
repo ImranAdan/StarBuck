@@ -9,5 +9,5 @@ public interface SourceRepository extends PagingAndSortingRepository<Source, Lon
 
     Source findByName(String name);
 
-    List<Source> findAllByType(Pageable pageable);
+    List<Source> findAllByType(Pageable pageable, SourceType type);
 }

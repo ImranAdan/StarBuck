@@ -13,13 +13,13 @@ public class Source implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "url")
+    @Column(name = "url", unique = true, nullable = false)
     private String url;
 
     @Column(name = "source_type")
@@ -59,28 +59,26 @@ public class Source implements Serializable {
         return id;
     }
 
-
     @Override
     public boolean equals(final Object obj) {
 
-        if ((obj == null)
-                || !(obj instanceof Source))
+        if ((obj == null) || !(obj instanceof Source))
             return false;
 
         final Source other = (Source) obj;
-        return new EqualsBuilder().append(getName(), other.getName())
-                .append(getDescription(), other.getDescription())
-                .append(getSourceType(), other.getSourceType())
-                .append(getUrl(), other.getUrl())
+        return new EqualsBuilder().append(name, other.name)
+                .append(description, other.description)
+                .append(sourceType, other.sourceType)
+                .append(url, other.url)
                 .isEquals();
 
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(getName())
-                .append(getDescription())
-                .append(getSourceType()).toHashCode();
+        return new HashCodeBuilder().append(name)
+                .append(description)
+                .append(sourceType).toHashCode();
     }
 
 

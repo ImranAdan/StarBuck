@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static junit.framework.Assert.fail;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:app-context.xml")
 public class DataSourceManagerTest {
@@ -15,32 +17,32 @@ public class DataSourceManagerTest {
 
     @Test
     public void testCreate() throws Exception {
-
+        fail("Test yet not implemented");
     }
 
-    @Test
+    //@Test
     public void testUpdate() throws Exception {
-
+        fail("Test yet not implemented");
     }
 
-    @Test
+    //@Test
     public void testDelete() throws Exception {
-
+        fail("Test yet not implemented");
     }
 
-    @Test
+    //@Test
     public void testGetByName() throws Exception {
 
     }
 
-    @Test
+    //@Test
     public void testGetByType() throws Exception {
-
+        fail("Test yet not implemented");
     }
 
-    @Test
+    //@Test
     public void testGetAll() throws Exception {
-
+        fail("Test yet not implemented");
     }
 
 
