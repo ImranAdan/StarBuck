@@ -10,6 +10,6 @@
 
     <repositories base-package="org.adani.starbuck"/>
 
-    <beans:bean id="dataSourceManager" class="org.adani.starbuck.domain.source.DataSourceManager" autowire="byName"/>
+    <beans:bean id="dataSourceManager" class="org.adani.starbuck.data.source.DataSourceManager" autowire="byName"/>
 
 </beans:beans>

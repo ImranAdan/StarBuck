@@ -1,11 +1,7 @@
-package org.adani.starbuck.domain.source;
+package org.adani.starbuck.data.source;
 
+import org.adani.starbuck.domain.source.Source;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-
-import java.util.List;
 
 public class DataSourceManager {
 
@@ -29,18 +25,6 @@ public class DataSourceManager {
     public Source getByName(String name) {
         Source source = sourceRepository.findByName(name);
         return source;
-    }
-
-    public List<Source> getAll(int pageNumber, int pageSize, String sortKey, String direction) {
-        List<Source> allSources = sourceRepository.findAllByType(new PageRequest(pageNumber, pageSize, new Sort(Sort.Direction.valueOf(direction), sortKey)), SourceType.valueOf(sortKey));
-        return allSources;
-    }
-
-    public List<Source> getByType(int pageNumber, int pageSize, String sortKey, String direction) {
-        Sort appliedSort = new Sort(Sort.Direction.valueOf(direction), sortKey);
-        Pageable pageable = new PageRequest(pageNumber, pageSize, appliedSort);
-        List<Source> byType = sourceRepository.findAllByType(pageable, SourceType.valueOf(sortKey));
-        return byType;
     }
 
     private Source make(String name, String description, String sourceType, String url) {

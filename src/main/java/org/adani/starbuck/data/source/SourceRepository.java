@@ -1,13 +1,12 @@
-package org.adani.starbuck.domain.source;
+package org.adani.starbuck.data.source;
 
-import org.springframework.data.domain.Pageable;
+import org.adani.starbuck.domain.source.Source;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.util.List;
-
+@EnableJpaRepositories
 public interface SourceRepository extends PagingAndSortingRepository<Source, Long> {
 
     Source findByName(String name);
 
-    List<Source> findAllByType(Pageable pageable, SourceType type);
 }
