@@ -14,8 +14,6 @@ public final class ClassUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtils.class);
 
-
-    // Candidate for AspecLogging
     public static <T> T make(Type objectType, Map<Object, Class<?>> valueTypeMap) {
 
         try {

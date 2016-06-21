@@ -1,14 +1,13 @@
 package org.adani.starbuck.utils;
 
-import org.adani.starbuck.domain.source.Source;
-import org.adani.starbuck.domain.source.SourceType;
+import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 
 public class XMLUtilsTest {
 
-    @Test
+    @Test(expected = Exception.class)
     public void testToXMLString() throws Exception {
-        Source s = new Source("a", "b", SourceType.H2.getConnector(), "s");
-        System.out.print(s.toString());
+        throw new NotImplementedException("Not yet implemented!");
+
     }
 }
