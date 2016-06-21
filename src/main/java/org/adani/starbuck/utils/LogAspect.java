@@ -5,6 +5,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,7 @@ public class LogAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);
 
-
+    @Before("execution(* org.adani.starbuck..*..*(..))")
     protected void onEntry(JoinPoint jp) {
         String args = getJointPointArgs(jp);
         String actionMessage = "ENTRY:[" + jp.getSignature().getDeclaringTypeName() + "," + jp.getSignature().getName() + "(..) -> " + args + "]";
