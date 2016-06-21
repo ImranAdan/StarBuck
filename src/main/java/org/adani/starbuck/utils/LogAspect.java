@@ -10,9 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * TODO: Currently this advices no one need to advice as follows: @Before("execution(* org.adani.starbuck.data.core.sources.{CLASS_NAME}.*.*(..))")
- *
+ * TODO: Refactor advice on
  *
  *
  */
@@ -28,14 +26,14 @@ public class LogAspect {
         LOGGER.info(actionMessage);
     }
 
-    @After("execution(* org.adani.starbuck.data.core.sources.queryable.*.*(..))")
+    @After("execution(* org.adani.starbuck..*..*(..))")
     protected void onExit(JoinPoint jp) {
         String args = getJointPointArgs(jp);
         String actionMessage = "EXIT:[" + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() +"(..) -> " + args + "]";
         LOGGER.info(actionMessage);
     }
 
-    @AfterThrowing(pointcut = "execution(* org.adani.starbuck.data.core.sources.queryable.*.*(..))", throwing = "ex")
+    @AfterThrowing(pointcut = ("execution(* org.adani.starbuck..*..*(..))"), throwing = "ex")
     protected void onExceptionThrown(JoinPoint jp, Throwable ex) {
         String fault = "EXCEPTION [ " + ex.getMessage() + " ]";
         LOGGER.info(fault);
@@ -50,9 +48,7 @@ public class LogAspect {
         for (Object o: jp.getArgs())
             actionArgs += o.toString();
 
-        actionArgs = actionArgs.substring(actionArgs.length() - 1) +  "]";
-
-        return actionArgs;
+        return actionArgs.substring(actionArgs.length() - 1) + "]";
     }
 
 }

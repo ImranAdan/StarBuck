@@ -7,9 +7,6 @@
     http://www.springframework.org/schema/data/jpa
     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-
-    <repositories base-package="org.adani.starbuck"/>
-
-    <beans:bean id="dataSourceManager" class="org.adani.starbuck.data.source.DataSourceManager" autowire="byName"/>
+    <beans:bean id="sourceDAO" class="org.adani.starbuck.source.SourceDAO" autowire="byName"/>
 
 </beans:beans>

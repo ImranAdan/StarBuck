@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Property Placeholder Configure -->
-    <bean id="CONF" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-        <property name="location" value="${CONFIG_MODE}"/>
-        <property name="locations">
-            <list>
-                <value>${CONFIG_MODE}</value>
-                <value>${CONFIG_MODE}/app.properties</value>
-            </list>
-        </property>
-    </bean>
+    <!-- USE THIS FOR DIFFERENT ENVIRIONMENT CONFIGURATION, PASSING ${CONFIG_MODE} as a JVM ARG as follows: -DCONFIG_MODE=MY_MODE_HERE-->
+    <!--<bean id="CONF" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+    <!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
+    <!--<property name="location" value="${CONFIG_MODE}"/>-->
+    <!--<property name="locations">-->
+    <!--<list>-->
+    <!--<value>${CONFIG_MODE}</value>-->
+    <!--<value>${CONFIG_MODE}/app.properties</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!---->
+
+    <context:property-placeholder location="classpath:app.properties"/>
 
     <!-- External Resources -->
     <import resource="classpath:database-context.xml"/>
 
     <!-- Domain Sepcefic configurations -->
-    <import resource="classpath:${CONFIG_MODE}/domain-context.xml"/>
+    <import resource="classpath:domain-context.xml"/>
+
 
     <!-- Aspect J Proxy with Logging Aspect -->
     <aop:aspectj-autoproxy/>
