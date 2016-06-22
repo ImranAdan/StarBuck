@@ -10,15 +10,13 @@ CREATE SCHEMA ATHENA AUTHORIZATION SA;
 DROP TABLE IF EXISTS ATHENA.SOURCE;
 
 // CREATE THE DATA_SOURCE TABLE
-CREATE TABLE ATHENA.SOURCE
+CREATE TABLE SOURCE
 (
-  id              INTEGER               AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  name            VARCHAR(255)                                     NOT NULL,
-  url             VARCHAR(255)                                     NOT NULL,
-  source_type     VARCHAR(255)                                     NOT NULL,
-  description     TEXT
+  ID          INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  NAME        VARCHAR(50)                        NOT NULL,
+  URL         VARCHAR(255)                       NOT NULL,
+  SOURCE_TYPE VARCHAR(255)                       NOT NULL,
+  DESCRIPTION CLOB
 );
 
-// INSERT SOME CONFIGURATIONS
-INSERT INTO SOURCE (name, url, source_type, description) VALUES ('MEM::H2 Datasource', 'jdbc:h2:mem:DEV_ATHENA', 'H2', 'Example DataSource for Athena Application');
-
+CREATE UNIQUE INDEX "SOURCE_NAME_uindex" ON SOURCE (NAME)
