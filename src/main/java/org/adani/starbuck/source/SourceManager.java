@@ -11,13 +11,11 @@ public class SourceManager {
     private SourceDAO sourceDAO;
 
     public Source create(String name, String url, SourceType type, String description) {
-        Source source = sourceDAO.create(name, url, type, description);
-        return source;
+        return sourceDAO.create(name, url, type, description);
     }
 
     public Source update(Source s) {
-        Source updatedSource = sourceDAO.update(s);
-        return updatedSource;
+        return sourceDAO.update(s);
     }
 
     public void delete(Source s) {
@@ -25,20 +23,16 @@ public class SourceManager {
     }
 
     public Source fetch(Source s) {
-        Source fetched = sourceDAO.fetch(s);
-        return fetched;
+        return sourceDAO.fetch(s);
     }
 
     public List<Source> fetchAll() {
-        List<Source> sources = sourceDAO.fetchAll();
-        return sources;
+        return sourceDAO.fetchAll();
     }
 
     public Page<Source> fetchPage(int start, int limit) {
-        final Page<Source> sourcePage = sourceDAO.fetchPage(start, limit);
-        return sourcePage;
+        return sourceDAO.fetchPage(start, limit);
     }
-
 
     public SourceDAO getSourceDAO() {
         return sourceDAO;
