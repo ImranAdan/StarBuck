@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://www.springframework.org/schema/aop
-	http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- USE THIS FOR DIFFERENT ENVIRIONMENT CONFIGURATION, PASSING ${CONFIG_MODE} as a JVM ARG as follows: -DCONFIG_MODE=MY_MODE_HERE-->
     <!--<bean id="CONF" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
@@ -20,7 +20,10 @@
     <!--</bean>-->
     <!---->
 
-    <context:property-placeholder location="classpath:app.properties"/>
+    <!-- Property Place Holders -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:app.properties"/>
+    </bean>
 
     <!-- External Resources -->
     <import resource="classpath:database-context.xml"/>

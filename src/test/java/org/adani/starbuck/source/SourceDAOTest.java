@@ -26,7 +26,7 @@ public class SourceDAOTest {
         SourceType type = SourceType.H2;
         String description = "This is a test source type";
         Source source = sourceDAO.create(name, sourceUrl, type, description);
-        assertThat(source, is(notNullValue()));
+        assertThat(source.getId(), is(notNullValue()));
     }
 
     @Ignore

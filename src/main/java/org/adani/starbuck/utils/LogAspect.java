@@ -22,14 +22,14 @@ public class LogAspect {
     @Before("execution(* org.adani.starbuck..*..*(..))")
     protected void onEntry(JoinPoint jp) {
         String args = getJointPointArgs(jp);
-        String actionMessage = "ENTRY:[" + jp.getSignature().getDeclaringTypeName() + "," + jp.getSignature().getName() + "(..) -> " + args + "]";
+        String actionMessage = "ENTER: [" + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() + "( " + args + " )";
         LOGGER.info(actionMessage);
     }
 
     @After("execution(* org.adani.starbuck..*..*(..))")
     protected void onExit(JoinPoint jp) {
         String args = getJointPointArgs(jp);
-        String actionMessage = "EXIT:[" + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() +"(..) -> " + args + "]";
+        String actionMessage = "EXIT: [" + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() + "( " + args + " )";
         LOGGER.info(actionMessage);
     }
 

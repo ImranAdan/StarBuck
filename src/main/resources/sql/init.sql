@@ -1,9 +1,15 @@
 /** CREATE A SCHEMA FOR LOCAL TESTING ***/
 
-// Create a schema
+//DROP IF EXISTS
+DROP SCHEMA IF EXISTS ATHENA;
+
+// CREATE SCHEMA
 CREATE SCHEMA ATHENA AUTHORIZATION SA;
 
-// Create a table for data sources
+// DROP THE TABLE
+DROP TABLE IF EXISTS ATHENA.SOURCE;
+
+// CREATE THE DATA_SOURCE TABLE
 CREATE TABLE ATHENA.SOURCE
 (
   id              INTEGER               AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -13,6 +19,6 @@ CREATE TABLE ATHENA.SOURCE
   description     TEXT
 );
 
-// Insert Test config data
+// INSERT SOME CONFIGURATIONS
 INSERT INTO SOURCE (name, url, source_type, description) VALUES ('MEM::H2 Datasource', 'jdbc:h2:mem:DEV_ATHENA', 'H2', 'Example DataSource for Athena Application');
 

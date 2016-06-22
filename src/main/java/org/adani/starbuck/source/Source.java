@@ -35,4 +35,8 @@ public class Source {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public long getId() {
+        return id;
+    }
 }
