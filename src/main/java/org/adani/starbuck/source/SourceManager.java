@@ -1,6 +1,8 @@
 package org.adani.starbuck.source;
 
+
 import org.adani.starbuck.data.Page;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class SourceManager {
         sourceDAO.delete(s);
     }
 
-    public Source fetch(Source s) {
-        return sourceDAO.fetch(s);
+    public Source fetch(String name) {
+        return sourceDAO.fetch(name);
     }
 
     public List<Source> fetchAll() {
@@ -31,7 +33,7 @@ public class SourceManager {
     }
 
     public Page<Source> fetchPage(int start, int limit) {
-        return sourceDAO.fetchPage(start, limit);
+        throw new NotImplementedException("Method yet not implemented");
     }
 
     public SourceDAO getSourceDAO() {

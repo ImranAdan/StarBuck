@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
+import java.util.Collections;
 import java.util.List;
 
 public class SourceDAO {
@@ -23,7 +24,8 @@ public class SourceDAO {
     DataSource dataSource;
 
     public Source fetch(String name) {
-        return fetchWithValues(name);
+        SQLBuilder builder = new SQLBuilder(Collections.singletonMap(":name", name));
+        return fetchWithBuilder(builder);
     }
 
     /**
@@ -38,11 +40,16 @@ public class SourceDAO {
     @Transactional
     public Source create(String name, String sourceURL, SourceType type, String description) {
 
-        Source source = fetchWithValues(name, sourceURL, type.toString(), description);
+        Source source = fetch(name);
         if (source != null) {
             return source;
         }
 
+        Source s = insert(name, sourceURL, type, description);
+        return s;
+    }
+
+    private Source insert(String name, String sourceURL, SourceType type, String description) {
         //BEGIN INSERT OPERATION
         final String sql = "INSERT INTO ATHENA.SOURCE (name, url, source_type, description) VALUES (?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -66,27 +73,18 @@ public class SourceDAO {
         return new JdbcTemplate(dataSource).queryForObject(sql, new Object[]{id}, Source.class);
     }
 
-
-    private Source fetchWithValues(String... values) {
+    private Source fetchWithBuilder(SQLBuilder builder) {
         try {
-            SQLBuilder builder = new SQLBuilder(values);
 
+            String attribute = String.join(", ", SourceMappings.fields()).trim();
+            String sql = "SELECT " + attribute.substring(0, attribute.length()) + " FROM ATHENA.SOURCE WHERE " + builder.completeWhereClause();
 
-            /**
-             * TODO: fetch with values; generation of sql statement
-             */
-
-            final List<String> fields = SourceMappings.fields();
-            String fields = String.join(", ", ).trim();
-
-            String sql = "SELECT " + fields.substring(0, fields.length() - 1) + " FROM ATHENA.SOURCE WHERE ";
-
-
-            return new NamedParameterJdbcTemplate(dataSource).query(builder.sbSql(), builder.getParamMap(), SourceMappings.extractor());
+            return new NamedParameterJdbcTemplate(dataSource).query(sql, builder.getParamMap(), SourceMappings.extractor());
         } catch (Exception e) {
             return null;
         }
     }
+
 
     /**
      * Fetch all persisted data source records
