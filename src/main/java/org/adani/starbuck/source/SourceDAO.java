@@ -30,7 +30,7 @@ public class SourceDAO {
             PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
             ps.setString(1, name);
             ps.setString(2, sourceURL);
-            ps.setString(3, type.getDriver());
+            ps.setString(3, type.toString());
             ps.setString(4, description);
             return ps;
         }, keyHolder);
@@ -58,8 +58,11 @@ public class SourceDAO {
 
 
     private Source fetch(long sourceId) {
-        final String sql = "SELECT * FROM SOURCE WHERE id = ?";
-        Source source = new JdbcTemplate(dataSource).queryForObject(sql, new Object[]{sourceId}, Source.class);
+        final String sql = "SELECT * FROM ATHENA.SOURCE WHERE id = ?";
+        Source source = new JdbcTemplate(dataSource).queryForObject(sql, new Object[]{sourceId}, (resultSet, i) -> {
+            SourceType type = SourceType.valueOf(resultSet.getString("source_type"));
+            return new Source(resultSet.getLong("id"), resultSet.getString("name"), resultSet.getString("url"), type, resultSet.getString("description"));
+        });
         return source;
     }
 

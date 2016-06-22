@@ -29,9 +29,15 @@ public class LogAspect {
     @After("execution(* org.adani.starbuck..*..*(..))")
     protected void onExit(JoinPoint jp) {
         String args = getJointPointArgs(jp);
-        String actionMessage = "EXIT: [" + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() + "( " + args + " )";
+        String actionMessage = "EXIT: [" + jp.getSignature().getDeclaringTypeName() + "::" + jp.getSignature().getName() + "( " +
+
+                args
+
+
+                + " )";
         LOGGER.info(actionMessage);
     }
+
 
     @AfterThrowing(pointcut = ("execution(* org.adani.starbuck..*..*(..))"), throwing = "ex")
     protected void onExceptionThrown(JoinPoint jp, Throwable ex) {
