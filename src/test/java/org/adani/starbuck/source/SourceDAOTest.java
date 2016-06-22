@@ -19,6 +19,7 @@ public class SourceDAOTest {
     @Autowired
     SourceDAO sourceDAO;
 
+
     @Test
     public void testCreate() throws Exception {
         String name = "TEST_TEST";
@@ -27,6 +28,18 @@ public class SourceDAOTest {
         String description = "This is a test source type";
         Source source = sourceDAO.create(name, sourceUrl, type, description);
         assertThat(source.getId(), is(notNullValue()));
+    }
+
+    @Ignore
+    @Test
+    public void testFetch() throws Exception {
+        fail("Test not yet implemented");
+    }
+
+    @Ignore
+    @Test
+    public void testFetchAll() throws Exception {
+        fail("Test not yet implemented");
     }
 
     @Ignore
@@ -42,16 +55,6 @@ public class SourceDAOTest {
     }
 
     @Ignore
-    @Test
-    public void testFetch() throws Exception {
-        fail("Test not yet implemented");
-    }
-
-    @Test
-    public void testFetchAll() throws Exception {
-        fail("Test not yet implemented");
-    }
-
     @Test
     public void testFetchPage() throws Exception {
         fail("Test not yet implemented");

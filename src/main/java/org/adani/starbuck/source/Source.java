@@ -1,5 +1,8 @@
 package org.adani.starbuck.source;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class Source {
 
     private final long id;
@@ -39,4 +42,11 @@ public class Source {
     public long getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+
 }

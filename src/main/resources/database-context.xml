@@ -9,16 +9,15 @@
     </bean>
 
 
-    <bean id="dataSource" class="org.h2.jdbcx.JdbcDataSource">
-        <property name="URL" value="${url}"/>
-        <property name="user" value="${user}"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="driverClassName" value="${driver}"/>
         <property name="password" value="${pass}"/>
     </bean>
 
-
-    <!--&lt;!&ndash; IN MEMORY H2 Database &ndash;&gt;-->
-    <!--<jdbc:embedded-database type="H2">-->
-    <!--<jdbc:script location="classpath:sql/init.sql"/>-->
-    <!--</jdbc:embedded-database>-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
 </beans>

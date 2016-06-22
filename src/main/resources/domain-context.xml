@@ -7,6 +7,8 @@
     http://www.springframework.org/schema/data/jpa
     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
+
     <beans:bean id="sourceDAO" class="org.adani.starbuck.source.SourceDAO" autowire="byName"/>
+
 
 </beans:beans>
