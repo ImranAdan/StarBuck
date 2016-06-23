@@ -46,7 +46,7 @@ public class LogAspect {
         for (Object o: jp.getArgs())
             args += o.toString() + ", ";
 
-        return args.substring(0, args.length() - 2) + "]";
+        return args.length() > 1 ? args.substring(0, args.length() - 2) + "]" : "]";
     }
 
 }

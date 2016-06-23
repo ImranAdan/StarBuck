@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-//TODO: Refactor single instance functions vs those with the that return collections
 public class SourceDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SourceDAO.class);
@@ -26,20 +25,15 @@ public class SourceDAO {
     DataSource dataSource;
 
     public Source fetch(String name) {
-        SQLBuilder builder = new SQLBuilder(Collections.singletonMap("name", name));
-        final Source fetchedSource = fetchWithBuilder(builder);
+        final Source fetchedSource = fetch(new SQLBuilder(Collections.singletonMap("name", name)));
         return fetchedSource;
     }
 
-    /**
-     * Create a new data source.
-     *
-     * @param name        Name of the data-source, used for look up
-     * @param sourceURL   URL of Data source
-     * @param type        What Type of data source it is
-     * @param description A brief description containing the purpose of the data source
-     * @return A created Data source
-     */
+    public List<Source> fetchAll() {
+        final List<Source> sources = new NamedParameterJdbcTemplate(dataSource).query("SELECT * FROM ATHENA.SOURCE", Collections.EMPTY_MAP, SourceMappings.mapper());
+        return sources;
+    }
+
     @Transactional
     public Source create(String name, String sourceURL, SourceType type, String description) {
         Source source = insert(name, sourceURL, type, description);
@@ -66,46 +60,26 @@ public class SourceDAO {
         return fetched;
     }
 
-    /**
-     * Fetch all persisted data source records
-     *
-     * @return A collection of sources
-     */
-    public List<Source> fetchAll() {
-        final String sql = "SELECT * FROM ATHENA.SOURCE";
-        return new JdbcTemplate(dataSource).queryForList(sql, Source.class);
-    }
-
     private Source fetchWithId(int id) {
         final String sql = "SELECT * FROM ATHENA.SOURCE WHERE id = ?";
         return new JdbcTemplate(dataSource).queryForObject(sql, new Object[]{id}, Source.class);
     }
 
-    private Source fetchWithBuilder(SQLBuilder builder) {
+    private Source fetch(SQLBuilder builder) {
         try {
 
             String attribute = String.join(", ", SourceMappings.fields()).trim();
             String sql = "SELECT " + attribute.substring(0, attribute.length()) + " FROM ATHENA.SOURCE WHERE " + builder.completeWhereClause();
-
             return new NamedParameterJdbcTemplate(dataSource).queryForObject(sql, builder.getParamMap(), SourceMappings.mapper());
         } catch (Exception e) {
             return null;
         }
     }
 
-    /**
-     * TODO: Implement
-     * @param s
-     * @return
-     */
     public Source update(Source s) {
         throw new NotImplementedException("Method yet not implemented");
     }
 
-    /**
-     * TODO: Implement
-     * @param s
-     */
     public void delete(Source s) {
         throw new NotImplementedException("Method yet not implemented");
     }

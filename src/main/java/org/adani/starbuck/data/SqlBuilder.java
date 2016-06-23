@@ -32,7 +32,7 @@ public class SQLBuilder {
         StringBuilder sb = new StringBuilder();
 
         for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-            sb.append(entry.getKey().replace(":", "") + " = " + entry.getKey());
+            sb.append(entry.getKey() + " = :" + entry.getKey());
         }
 
         String whereClause = StringUtils.replaceLast(sb.toString(), "AND ", "");
