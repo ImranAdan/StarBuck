@@ -14,9 +14,7 @@ public class JSONUtils {
      *  Object that is the representation of the JSON configuration.
      */
     public static <T> T createInstance(String jsonString, Class<T> instanceType)   {
-        /**
-         * TODO: Implement createInstance functionality
-         */
+
         return null;
     }
 }
