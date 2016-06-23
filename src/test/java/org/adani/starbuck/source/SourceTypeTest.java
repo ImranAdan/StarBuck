@@ -10,15 +10,9 @@ public class SourceTypeTest {
     @Test
     public void testGetDriver() throws Exception {
         SourceType first = H2;
-        String second = "org.h2.Driver";
-
-
+        String second = "H2";
         System.out.println(first.toString());
-
-
         System.out.println(SourceType.valueOf(second));
-
-
         assertTrue(first == SourceType.valueOf(second));
     }
 }

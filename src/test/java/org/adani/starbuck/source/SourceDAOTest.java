@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -19,8 +21,7 @@ public class SourceDAOTest {
     @Autowired
     SourceDAO sourceDAO;
 
-
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testCreate() throws Exception {
         String name = "TEST_TEST";
         String sourceUrl = "TEST_@TEST";
@@ -30,16 +31,17 @@ public class SourceDAOTest {
         assertThat(source.getId(), is(notNullValue()));
     }
 
-    @Ignore
     @Test
     public void testFetch() throws Exception {
-        fail("Test not yet implemented");
+        String name = "TEST_TEST";
+        final Source fetched = sourceDAO.fetch(name);
+        assertThat(fetched.getId(), is(notNullValue()));
     }
 
-    @Ignore
     @Test
     public void testFetchAll() throws Exception {
-        fail("Test not yet implemented");
+        final List<Source> sources = sourceDAO.fetchAll();
+        assertThat(sources, is(notNullValue()));
     }
 
     @Ignore

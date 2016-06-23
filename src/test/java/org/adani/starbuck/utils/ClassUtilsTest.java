@@ -3,6 +3,7 @@ package org.adani.starbuck.utils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ClassUtilsTest {
@@ -15,7 +16,12 @@ public class ClassUtilsTest {
 
     }
 
-    public Map<Object, Class<?>> getExampleTypeMap() {
-        return null;
+    private Map<Object, Class<?>> getExampleTypeMap() {
+        Map<Object, Class<?>> valueTypeMap = new LinkedHashMap<>();
+        valueTypeMap.put("H2 DataSource", String.class);
+        valueTypeMap.put("Example Configuration Source", String.class);
+        valueTypeMap.put(H2_DRIVER, String.class);
+        valueTypeMap.put("Fake URL Example", String.class);
+        return valueTypeMap;
     }
 }

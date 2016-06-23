@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.util.Collections;
 import java.util.List;
 
+
+//TODO: Refactor single instance functions vs those with the that return collections
 public class SourceDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SourceDAO.class);
@@ -24,8 +26,9 @@ public class SourceDAO {
     DataSource dataSource;
 
     public Source fetch(String name) {
-        SQLBuilder builder = new SQLBuilder(Collections.singletonMap(":name", name));
-        return fetchWithBuilder(builder);
+        SQLBuilder builder = new SQLBuilder(Collections.singletonMap("name", name));
+        final Source fetchedSource = fetchWithBuilder(builder);
+        return fetchedSource;
     }
 
     /**
@@ -39,17 +42,12 @@ public class SourceDAO {
      */
     @Transactional
     public Source create(String name, String sourceURL, SourceType type, String description) {
-
-        Source source = fetch(name);
-        if (source != null) {
-            return source;
-        }
-
-        Source s = insert(name, sourceURL, type, description);
-        return s;
+        Source source = insert(name, sourceURL, type, description);
+        return source;
     }
 
     private Source insert(String name, String sourceURL, SourceType type, String description) {
+
         //BEGIN INSERT OPERATION
         final String sql = "INSERT INTO ATHENA.SOURCE (name, url, source_type, description) VALUES (?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -68,6 +66,16 @@ public class SourceDAO {
         return fetched;
     }
 
+    /**
+     * Fetch all persisted data source records
+     *
+     * @return A collection of sources
+     */
+    public List<Source> fetchAll() {
+        final String sql = "SELECT * FROM ATHENA.SOURCE";
+        return new JdbcTemplate(dataSource).queryForList(sql, Source.class);
+    }
+
     private Source fetchWithId(int id) {
         final String sql = "SELECT * FROM ATHENA.SOURCE WHERE id = ?";
         return new JdbcTemplate(dataSource).queryForObject(sql, new Object[]{id}, Source.class);
@@ -79,21 +87,10 @@ public class SourceDAO {
             String attribute = String.join(", ", SourceMappings.fields()).trim();
             String sql = "SELECT " + attribute.substring(0, attribute.length()) + " FROM ATHENA.SOURCE WHERE " + builder.completeWhereClause();
 
-            return new NamedParameterJdbcTemplate(dataSource).query(sql, builder.getParamMap(), SourceMappings.extractor());
+            return new NamedParameterJdbcTemplate(dataSource).queryForObject(sql, builder.getParamMap(), SourceMappings.mapper());
         } catch (Exception e) {
             return null;
         }
-    }
-
-
-    /**
-     * Fetch all persisted data source records
-     * @return
-     *  A collection of sources
-     */
-    public List<Source> fetchAll() {
-        final String sql = "SELECT * FROM ATHENA.SOURCE";
-        return new JdbcTemplate(dataSource).queryForList(sql, Source.class);
     }
 
     /**

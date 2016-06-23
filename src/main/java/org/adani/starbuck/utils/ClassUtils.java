@@ -14,6 +14,15 @@ public final class ClassUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtils.class);
 
+    /**
+     * Make instance of an Object, invoking the constructor that would take in a set of arguments
+     * that are described by the valueTypeMap variable. The function can be used as follows. </br>
+     *
+     * @param objectType
+     * @param valueTypeMap
+     * @param <T>
+     * @return
+     */
     public static <T> T make(Type objectType, Map<Object, Class<?>> valueTypeMap) {
 
         try {
